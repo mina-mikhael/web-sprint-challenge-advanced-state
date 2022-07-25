@@ -48,7 +48,11 @@ function Quiz({ quiz, selectedAnswer, fetchQuiz, selectAnswer, postAnswer, reset
 
             <button
               id="submitAnswerBtn"
-              disabled={answerID ? false : true}
+              disabled={
+                quiz.answers[0].answer_id === answerID || quiz.answers[1].answer_id === answerID
+                  ? false
+                  : true
+              }
               onClick={() => submitClickHandler()}>
               Submit answer
             </button>
