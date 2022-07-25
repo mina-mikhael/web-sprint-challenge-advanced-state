@@ -74,13 +74,12 @@ function form(state = initialFormState, action) {
   switch (action.type) {
     case INPUT_CHANGE:
       return {
-        newQuestion: action.payload.newQuestion ? action.payload.newQuestion : state.newQuestion,
-        newTrueAnswer: action.payload.newTrueAnswer
-          ? action.payload.newTrueAnswer
-          : state.newTrueAnswer,
-        newFalseAnswer: action.payload.newFalseAnswer
-          ? action.payload.newFalseAnswer
-          : state.newFalseAnswer,
+        newQuestion:
+          action.payload.name === "newQuestion" ? action.payload.value : state.newQuestion,
+        newTrueAnswer:
+          action.payload.name === "newTrueAnswer" ? action.payload.value : state.newTrueAnswer,
+        newFalseAnswer:
+          action.payload.name === "newFalseAnswer" ? action.payload.value : state.newFalseAnswer,
       };
     case RESET_FORM:
       return (state = initialFormState);

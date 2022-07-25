@@ -40,10 +40,10 @@ export function setQuiz(data) {
   return { type: SET_QUIZ_INTO_STATE, payload: data };
 }
 
-export function inputChange([name], value) {
+export function inputChange(eventData) {
   return {
     type: INPUT_CHANGE,
-    payload: { [name]: value },
+    payload: eventData,
   };
 }
 

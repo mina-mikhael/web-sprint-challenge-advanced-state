@@ -4,7 +4,7 @@ import { inputChange, resetForm, postQuiz, resetMessage } from "../state/action-
 
 function Form({ form, inputChange, resetForm, postQuiz, resetMessage }) {
   const changeHandler = (evt) => {
-    inputChange([evt.target.name], evt.target.value);
+    inputChange(evt.target);
     resetMessage();
   };
 
@@ -44,7 +44,7 @@ function Form({ form, inputChange, resetForm, postQuiz, resetMessage }) {
       <button
         id="submitNewQuizBtn"
         disabled={
-          form.newFalseAnswer.trim() && form.newQuestion.trim() && form.newTrueAnswer.trim()
+          form.newQuestion.trim() && form.newTrueAnswer.trim() && form.newFalseAnswer.trim()
             ? false
             : true
         }>
