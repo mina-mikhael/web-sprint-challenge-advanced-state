@@ -1,27 +1,53 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import * as actionCreators from '../state/action-creators'
+import { inputChange } from "../state/action-creators";
 
-export function Form(props) {
+function Form({ form, inputChange }) {
+  console.log(form);
 
-  const onChange = evt => {
+  const changeHandler = (evt) => {
+    inputChange([evt.target.name], evt.target.value);
+  };
 
-  }
-
-  const onSubmit = evt => {
-
-  }
+  const submitHandler = (evt) => {
+    evt.preventDefault();
+  };
 
   return (
-    <form id="form" onSubmit={onSubmit}>
+    <form id="form" onSubmit={submitHandler}>
       <h2>Create New Quiz</h2>
-      <input maxLength={50} onChange={onChange} id="newQuestion" placeholder="Enter question" />
-      <input maxLength={50} onChange={onChange} id="newTrueAnswer" placeholder="Enter true answer" />
-      <input maxLength={50} onChange={onChange} id="newFalseAnswer" placeholder="Enter false answer" />
+      <input
+        maxLength={50}
+        onChange={changeHandler}
+        name="newQuestion"
+        value={form.newQuestion.value}
+        id="newQuestion"
+        placeholder="Enter question"
+      />
+      <input
+        maxLength={50}
+        onChange={changeHandler}
+        name="newTrueAnswer"
+        value={form.newTrueAnswer.value}
+        id="newTrueAnswer"
+        placeholder="Enter true answer"
+      />
+      <input
+        maxLength={50}
+        onChange={changeHandler}
+        name="newFalseAnswer"
+        value={form.newFalseAnswer.value}
+        id="newFalseAnswer"
+        placeholder="Enter false answer"
+      />
       <button id="submitNewQuizBtn">Submit new quiz</button>
     </form>
-  )
+  );
 }
 
-export default connect(st => st, actionCreators)(Form)
+const mapStateToProps = (state) => {
+  return { form: state.form };
+};
+
+export default connect(mapStateToProps, { inputChange })(Form);
 

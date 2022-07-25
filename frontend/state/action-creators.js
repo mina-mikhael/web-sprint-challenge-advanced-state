@@ -40,7 +40,12 @@ export function setQuiz(data) {
   return { type: SET_QUIZ_INTO_STATE, payload: data };
 }
 
-export function inputChange() {}
+export function inputChange([name], value) {
+  return {
+    type: INPUT_CHANGE,
+    payload: { [name]: value },
+  };
+}
 
 export function resetForm() {}
 
