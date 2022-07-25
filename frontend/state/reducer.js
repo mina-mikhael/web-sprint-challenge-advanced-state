@@ -8,6 +8,7 @@ import {
   SET_SELECTED_ANSWER,
   RESET_SELECTED_ANSWER,
   SET_INFO_MESSAGE,
+  RESET_INFO_MESSAGE,
   INPUT_CHANGE,
   RESET_FORM,
 } from "./action-types";
@@ -52,9 +53,16 @@ function selectedAnswer(state = initialSelectedAnswerState, action) {
   }
 }
 
-const initialMessageState = ''
+const initialMessageState = "";
 function infoMessage(state = initialMessageState, action) {
-  return state
+  switch (action.type) {
+    case SET_INFO_MESSAGE:
+      return (state = action.payload);
+    case RESET_INFO_MESSAGE:
+      return (state = initialMessageState);
+    default:
+      return state;
+  }
 }
 
 const initialFormState = {
