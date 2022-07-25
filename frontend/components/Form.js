@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { inputChange, resetForm, postQuiz, resetMessage } from "../state/action-creators";
 
 function Form({ form, inputChange, resetForm, postQuiz, resetMessage }) {
-  console.log(form);
-
   const changeHandler = (evt) => {
     inputChange([evt.target.name], evt.target.value);
     resetMessage();
@@ -43,7 +41,15 @@ function Form({ form, inputChange, resetForm, postQuiz, resetMessage }) {
         id="newFalseAnswer"
         placeholder="Enter false answer"
       />
-      <button id="submitNewQuizBtn">Submit new quiz</button>
+      <button
+        id="submitNewQuizBtn"
+        disabled={
+          form.newFalseAnswer.trim() && form.newQuestion.trim() && form.newTrueAnswer.trim()
+            ? false
+            : true
+        }>
+        Submit new quiz
+      </button>
     </form>
   );
 }

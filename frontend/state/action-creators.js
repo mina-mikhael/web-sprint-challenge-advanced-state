@@ -70,7 +70,6 @@ export function fetchQuiz() {
   };
 }
 export function postAnswer(answerData) {
-  console.log("answerData", answerData);
   return function (dispatch) {
     // On successful POST:
     // - Dispatch an action to reset the selected answer state
@@ -89,14 +88,14 @@ export function postQuiz(formData) {
     // On successful POST:
     // - Dispatch the correct message to the the appropriate state
     // - Dispatch the resetting of the form
+    const postPayload = {
+      question_text: formData.newQuestion,
+      true_answer_text: formData.newTrueAnswer,
+      false_answer_text: formData.newFalseAnswer,
+    };
     axios
-      .post("http://localhost:9000/api/quiz/new", {
-        question_text: formData.newQuestion,
-        true_answer_text: formData.newTrueAnswer,
-        false_answer_text: formData.newFalseAnswer,
-      })
+      .post("http://localhost:9000/api/quiz/new", postPayload)
       .then((res) => {
-        console.log(res);
         dispatch(setMessage(`Congrats: "${res.data.question}" is a great question!`));
       })
       .catch((err) => console.log(err));

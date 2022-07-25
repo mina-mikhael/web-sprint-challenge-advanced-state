@@ -6,7 +6,7 @@ function Quiz({ quiz, selectedAnswer, fetchQuiz, selectAnswer, postAnswer, reset
   const [answerID, setAnswerID] = useState("");
   // console.log(quiz);
   useEffect(() => {
-    fetchQuiz();
+    !quiz && fetchQuiz();
   }, []);
 
   const answerClickHandler = (answer_id, quiz_id) => {
