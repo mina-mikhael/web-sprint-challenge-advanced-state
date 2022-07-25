@@ -82,6 +82,8 @@ function form(state = initialFormState, action) {
           ? action.payload.newFalseAnswer
           : state.newFalseAnswer,
       };
+    case RESET_FORM:
+      return (state = initialFormState);
     default:
       return state;
   }

@@ -1,16 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { inputChange } from "../state/action-creators";
+import { inputChange, resetForm, postQuiz, resetMessage } from "../state/action-creators";
 
-function Form({ form, inputChange }) {
+function Form({ form, inputChange, resetForm, postQuiz, resetMessage }) {
   console.log(form);
 
   const changeHandler = (evt) => {
     inputChange([evt.target.name], evt.target.value);
+    resetMessage();
   };
 
   const submitHandler = (evt) => {
     evt.preventDefault();
+    postQuiz(form);
+    resetForm();
   };
 
   return (
@@ -20,7 +23,7 @@ function Form({ form, inputChange }) {
         maxLength={50}
         onChange={changeHandler}
         name="newQuestion"
-        value={form.newQuestion.value}
+        value={form.newQuestion}
         id="newQuestion"
         placeholder="Enter question"
       />
@@ -28,7 +31,7 @@ function Form({ form, inputChange }) {
         maxLength={50}
         onChange={changeHandler}
         name="newTrueAnswer"
-        value={form.newTrueAnswer.value}
+        value={form.newTrueAnswer}
         id="newTrueAnswer"
         placeholder="Enter true answer"
       />
@@ -36,7 +39,7 @@ function Form({ form, inputChange }) {
         maxLength={50}
         onChange={changeHandler}
         name="newFalseAnswer"
-        value={form.newFalseAnswer.value}
+        value={form.newFalseAnswer}
         id="newFalseAnswer"
         placeholder="Enter false answer"
       />
@@ -49,5 +52,10 @@ const mapStateToProps = (state) => {
   return { form: state.form };
 };
 
-export default connect(mapStateToProps, { inputChange })(Form);
+export default connect(mapStateToProps, {
+  inputChange,
+  resetForm,
+  postQuiz,
+  resetMessage,
+})(Form);
 
