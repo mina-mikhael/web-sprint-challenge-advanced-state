@@ -77,10 +77,13 @@ export function postAnswer(answerData) {
     // - Dispatch the fetching of the next quiz
     axios
       .post("http://localhost:9000/api/quiz/answer", answerData)
-      .then((res) => dispatch(setMessage(res.data.message)))
+      .then((res) => {
+        dispatch(setMessage(res.data.message));
+        dispatch({ type: RESET_SELECTED_ANSWER });
+        dispatch(fetchQuiz());
+      })
       .catch((err) => dispatch(setMessage(err.message)));
-    dispatch({ type: RESET_SELECTED_ANSWER });
-    dispatch(fetchQuiz());
+
   };
 }
 export function postQuiz(formData) {
